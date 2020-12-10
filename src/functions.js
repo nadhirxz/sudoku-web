@@ -1,12 +1,12 @@
 export function possible(board, x, y, n) {
     // checking if there's n in the row
     for (let i = 0; i < 9; i++) {
-        if (board[x][i] == n) return false;
+        if (board[x][i] === n) return false;
     }
 
     // checking if there's n in the column
     for (let i = 0; i < 9; i++) {
-        if (board[i][y] == n) return false;
+        if (board[i][y] === n) return false;
     }
 
     // checking if there's n in the square
@@ -15,7 +15,7 @@ export function possible(board, x, y, n) {
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            if (board[a + i][b + j] == n) return false;
+            if (board[a + i][b + j] === n) return false;
         }
     }
 
@@ -28,10 +28,10 @@ export function print(board) {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
             a += " " + board[i][j] + " ";
-            if (j > 0 && j < 8 && (j + 1) % 3 == 0) a += " | ";
+            if (j > 0 && j < 8 && (j + 1) % 3 === 0) a += " | ";
         }
         a += "\n";
-        if (i > 0 && i < 8 && (i + 1) % 3 == 0) {
+        if (i > 0 && i < 8 && (i + 1) % 3 === 0) {
             for (let k = 0; k < 33; k++) {
                 a += "-";
             }
@@ -44,7 +44,7 @@ export function print(board) {
 export function solve(board) {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
-            if (board[i][j] == 0) {
+            if (board[i][j] === 0) {
                 let possibleNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                 let rand = randomInteger(0, possibleNumbers.length);
                 let n = possibleNumbers[rand];
@@ -110,3 +110,29 @@ function randomInteger(min, max) {
     max--;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export async function showCells(c) {
+    let cells = [];
+    while (c.length) cells.push(c.splice(0, 9));
+    for (const row of cells) {
+        await new Promise((resolve) => {
+            setTimeout(async () => {
+                for (const cell of row) {
+                    await new Promise((resolve) => {
+                        setTimeout(() => {
+                            cell.getElementsByClassName('inner-cell')[0].style.opacity = 1;
+                            resolve();
+                        }, 40);
+                    });
+                    resolve();
+                }
+            }, 40)
+        });
+    }
+}
+
+// async function showRow(row) {
+//     for (const cell of row) {
+
+//     }
+// }

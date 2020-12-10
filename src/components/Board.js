@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { showCells } from '../functions.js';
 import Cell from './Cell';
 
 export default class Board extends Component {
@@ -21,6 +22,7 @@ export default class Board extends Component {
                 }
             });
         });
+        showCells(cells);
     }
     render() {
         const board = this.props.board;
@@ -31,7 +33,7 @@ export default class Board extends Component {
                         <div className="row" key={`row-${i}`}>
                             {
                                 row.map((number, j) => {
-                                    return <Cell number={number} id={`${i}-${j}`} key={`cell-${i}${j}`} />
+                                    return <Cell style={{ opacity:'0' }} number={number} id={`${i}-${j}`} key={`cell-${i}${j}`} />
                                 })
                             }
                         </div>

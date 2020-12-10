@@ -22,3 +22,6 @@
 .clicked {
     background-color: #2d6e7e;
 }
+.inner-cell {
+    transition: opacity .5s;
+}
