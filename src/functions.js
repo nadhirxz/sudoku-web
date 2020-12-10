@@ -130,9 +130,3 @@ export async function showCells(c) {
         });
     }
 }
-
-// async function showRow(row) {
-//     for (const cell of row) {
-
-//     }
-// }
