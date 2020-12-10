@@ -1,9 +1,21 @@
 import './App.css';
+import Board from './components/Board';
 
 function App() {
+    const board = [
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0]
+    ];
     return (
         <div className="App">
-            Sudoku
+            <Board board={board}/>
         </div>
     );
 }

@@ -6,3 +6,16 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
 }
+
+.cell {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    margin:-1px 0 0 -1px
+}
+.line {
+    line-height: 0;
+}
