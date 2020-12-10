@@ -6,4 +6,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: #222;
     color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
