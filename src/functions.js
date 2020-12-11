@@ -130,3 +130,13 @@ export async function showCells(c) {
         });
     }
 }
+
+export function keyPress(key, cell, board) {
+    let cellNum = cell.id.split('-').map(e => parseInt(e)), x = cellNum[0], y = cellNum[1];
+    if (!isNaN(key) && key && key < 10) {
+        cell.children[0].innerHTML = key;
+        cell.classList.remove('possible');
+        cell.classList.remove('not-possible');
+    };
+    possible(board, x, y, key) ? cell.classList.add('possible') : cell.classList.add('not-possible')
+}

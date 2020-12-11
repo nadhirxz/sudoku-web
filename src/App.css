@@ -18,10 +18,18 @@
     vertical-align: top;
     border: 1px solid white;
     margin: -1px 0 0 -1px;
-}
-.clicked {
-    background-color: #2d6e7e;
+    transition: background-color .2s ease-in;
 }
 .inner-cell {
-    transition: opacity .5s;
+    opacity: 0;
+    transition: opacity .1s;
+}
+.clicked {
+    background-color: #0a9cc0;
+}
+.possible {
+    background-color: #22ad78;
+}
+.not-possible {
+    background-color: #be2020;
 }

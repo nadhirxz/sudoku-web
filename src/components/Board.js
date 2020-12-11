@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { showCells } from '../functions.js';
+import { showCells, keyPress } from '../functions.js';
 import Cell from './Cell';
 
 export default class Board extends Component {
@@ -16,24 +16,21 @@ export default class Board extends Component {
                     cell.classList.add('clicked');
                     if (clickedCell) clickedCell.classList.remove('clicked');
                     clickedCell = cell;
-                    document.onkeypress = (e) => {
-                        if (!isNaN(parseInt(e.key))) cell.innerHTML = e.key;
-                    };
+                    document.onkeypress = (e) => keyPress(parseInt(e.key), cell, this.props.board);
                 }
             });
         });
         showCells(cells);
     }
     render() {
-        const board = this.props.board;
         return (
             <div className="board">
-                {board.map((row, i) => {
+                {this.props.board.map((row, i) => {
                     return (
                         <div className="row" key={`row-${i}`}>
                             {
                                 row.map((number, j) => {
-                                    return <Cell style={{ opacity:'0' }} number={number} id={`${i}-${j}`} key={`cell-${i}${j}`} />
+                                    return <Cell number={number} id={`${i}-${j}`} key={`cell-${i}${j}`} />
                                 })
                             }
                         </div>
