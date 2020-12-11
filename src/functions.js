@@ -122,11 +122,11 @@ export async function showCells(c) {
                         setTimeout(() => {
                             cell.getElementsByClassName('inner-cell')[0].style.opacity = 1;
                             resolve();
-                        }, 40);
+                        }, 70);
                     });
                     resolve();
                 }
-            }, 40)
+            }, 70)
         });
     }
 }
@@ -137,6 +137,11 @@ export function keyPress(key, cell, board) {
         cell.children[0].innerHTML = key;
         cell.classList.remove('possible');
         cell.classList.remove('not-possible');
-        possible(board, x, y, key) ? cell.classList.add('possible') : cell.classList.add('not-possible')
+        if (possible(board, x, y, key)) {
+            cell.classList.add('possible');
+            board[x][y] = key;
+        }
+        else cell.classList.add('not-possible');
+        
     };
 }

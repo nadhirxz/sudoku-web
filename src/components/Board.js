@@ -1,27 +1,7 @@
 import { Component } from 'react'
-import { showCells, keyPress } from '../functions.js';
 import Cell from './Cell';
 
 export default class Board extends Component {
-    componentDidMount() {
-        let cells = Array.from(document.getElementsByClassName('cell'));
-        var clickedCell = false;
-        cells.forEach(cell => {
-            cell.addEventListener('click', () => {
-                if (cell.classList.contains('clicked')) {
-                    cell.classList.remove('clicked');
-                    clickedCell = false;
-                    document.onkeypress = null;
-                } else if (!cell.classList.contains('locked')) {
-                    cell.classList.add('clicked');
-                    if (clickedCell) clickedCell.classList.remove('clicked');
-                    clickedCell = cell;
-                    document.onkeypress = (e) => keyPress(parseInt(e.key), cell, this.props.board);
-                }
-            });
-        });
-        showCells(cells);
-    }
     render() {
         return (
             <div className="board">
