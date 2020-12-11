@@ -79,7 +79,7 @@
     transition: opacity .1s;
 }
 .clicked {
-    background-color: #0a9cc0;
+    box-shadow: 0 0 10px #0a9cc0;
 }
 .possible {
     background-color: #145a3d;

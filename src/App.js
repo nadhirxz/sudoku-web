@@ -23,7 +23,7 @@ function App() {
                         cell.classList.add('clicked');
                         if (clickedCell) clickedCell.classList.remove('clicked');
                         clickedCell = cell;
-                        document.onkeypress = (e) => keyPress(parseInt(e.key), cell, this.props.board);
+                        document.onkeypress = (e) => keyPress(parseInt(e.key), cell, board);
                     }
                 });
             });
