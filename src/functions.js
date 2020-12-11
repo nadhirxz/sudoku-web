@@ -137,6 +137,6 @@ export function keyPress(key, cell, board) {
         cell.children[0].innerHTML = key;
         cell.classList.remove('possible');
         cell.classList.remove('not-possible');
+        possible(board, x, y, key) ? cell.classList.add('possible') : cell.classList.add('not-possible')
     };
-    possible(board, x, y, key) ? cell.classList.add('possible') : cell.classList.add('not-possible')
 }
