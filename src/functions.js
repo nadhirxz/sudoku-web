@@ -133,15 +133,21 @@ export async function showCells(c) {
 
 export function keyPress(key, cell, board) {
     let cellNum = cell.id.split('-').map(e => parseInt(e)), x = cellNum[0], y = cellNum[1];
-    if (!isNaN(key) && key && key < 10) {
+    if (key == 0) {
+        board[x][y] = 0;
+        cell.children[0].innerHTML = "";
+        cell.classList.remove('possible');
+        cell.classList.remove('not-possible');
+        cell.classList.add('clicked');
+    } else if (key != board[x][y] && !isNaN(key) && key < 10) {
         cell.children[0].innerHTML = key;
         cell.classList.remove('possible');
         cell.classList.remove('not-possible');
         if (possible(board, x, y, key)) {
             cell.classList.add('possible');
-            board[x][y] = key;
+        } else {
+            cell.classList.add('not-possible');
         }
-        else cell.classList.add('not-possible');
-        
-    };
+        board[x][y] = key;
+    }
 }
