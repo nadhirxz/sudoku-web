@@ -160,17 +160,13 @@ export function startTimer(waitingTime, classname) {
         setInterval(() => {
             seconds++;
             timer.innerHTML = `${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`;
-            console.log( `${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`)
+            console.log(`${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`)
         }, 1000);
-    }, waitingTime + 1000);
+    }, waitingTime);
 }
 
 function pad(val) {
     var valString = val + "";
-    if (valString.length < 2) {
-      return "0" + valString;
-    } else {
-      return valString;
-    }
-  }
-  
+    if (valString.length < 2) return "0" + valString;
+    return valString;
+}

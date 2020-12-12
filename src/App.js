@@ -40,7 +40,7 @@ function App() {
                 <text x="50%" y="50%" fill="none" fontSize="8em" dominantBaseline="middle" textAnchor="middle">Sudoku !</text>
             </svg>
             <div className="container" style={{ opacity: '0' }}>
-                <Board board={board} className="board" waitingTime={waitingTime} />
+                <Board board={board} className="board" waitingTime={waitingTime + 1000} />
             </div>
         </div>
     );
