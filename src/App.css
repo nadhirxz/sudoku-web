@@ -87,3 +87,8 @@
 .not-possible {
     background-color: #661616;
 }
+.timer {
+    text-align: center;
+    opacity: 0;
+    transition: opacity .5s;
+}

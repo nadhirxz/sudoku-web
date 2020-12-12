@@ -151,3 +151,26 @@ export function keyPress(key, cell, board) {
         board[x][y] = key;
     }
 }
+
+export function startTimer(waitingTime, classname) {
+    let seconds = 0;
+    let timer = document.getElementsByClassName(classname)[0];
+    setTimeout(() => {
+        timer.style.opacity = 1;
+        setInterval(() => {
+            seconds++;
+            timer.innerHTML = `${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`;
+            console.log( `${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`)
+        }, 1000);
+    }, waitingTime + 1000);
+}
+
+function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+      return "0" + valString;
+    } else {
+      return valString;
+    }
+  }
+  
