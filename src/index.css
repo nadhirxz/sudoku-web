@@ -13,3 +13,6 @@ body {
     -ms-user-select: none;
     overflow-x: hidden;
 }
+button {
+    outline:none;
+}

@@ -203,7 +203,7 @@ function boardIsSolved(lastCell) {
     document.onkeypress = (e) => e.stopPropagation();
     clearInterval(timer);
 
-    document.getElementById('board-button-div').innerHTML = `<button id="board-button">New Game</button>`;
+    document.getElementById('board-button-div').innerHTML = `<button id="board-button" class="btn">New Game</button>`;
 
     document.getElementById('board-message').style.opacity = 1;
     document.getElementById('board-button').style.opacity = 1;
@@ -222,8 +222,27 @@ export function newGame() {
 
     document.getElementsByTagName('svg')[0].addEventListener('click', newGame);
 
+    document.getElementById('diff-plus').addEventListener('click', () => {
+        if (difficulty < 8) {
+            difficulty++;
+            setDifficulty();
+        }
+    });
+    document.getElementById('diff-minus').addEventListener('click', () => {
+        if (difficulty > 1) {
+            difficulty--;
+            setDifficulty();
+        }
+    });
+
     let cells = setCells(board);
     showCells(cells);
+}
+
+function setDifficulty() {
+    document.getElementById('difficulty').innerHTML = 'Difficulty: ' + difficulty;
+    document.getElementById('diff-bar').style.width = `${(difficulty/8)*100}%`;
+    newGame();
 }
 
 export function startTimer(waitingTime, id) {
@@ -246,6 +265,6 @@ function pad(val) {
 }
 
 var cells;
-var difficulty = 5;
+export var difficulty = 5;
 export var board = generateBoard(1);
 export var timer;

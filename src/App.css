@@ -68,7 +68,7 @@
 .board-footer {
     width: 100%;
     display: grid;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 20% 65% 15%;
 }
 #board-message {
     opacity: 0;
@@ -85,18 +85,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center
+    justify-content: center;
 }
 #board-button {
     height: 50%;
     width: 90%;
+    transition: .5s;
+    opacity: 0;
+}
+.btn {
     background-color: #0a9cc0;
     color: #fff;
     border:none;
     border-radius: 4px;
     cursor: pointer;
-    transition: .5s;
-    opacity: 0;
 }
 #board-button:hover {
     background-color: #12bee9;
@@ -139,3 +141,31 @@ svg:hover {
     fill: #0a9cc0;
     cursor: pointer;
 }
+
+.progress {
+    height: 10px;
+    width: 90%;
+	position: relative;
+	background: #444;
+	border-radius: 25px;
+    padding: 3px;
+    margin: auto;
+}
+.progress > span {
+    display: block;
+    height: 100%;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    background-color: #0a9cc0;
+}
+.difficulty-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.difficulty-btn {
+    margin: 2px;
+    width: 40%;
+}
+#difficulty { font-size: .7em; }

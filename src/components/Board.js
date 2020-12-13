@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Cell from './Cell';
 import Timer from './Timer';
+import DifficultyChooser from './DifficultyChooser';
 import { ReactComponent as Refresh } from '../refresh.svg';
 
 export default class Board extends Component {
@@ -27,7 +28,7 @@ export default class Board extends Component {
                         )
                     })}
                 </div>
-            
+                <DifficultyChooser />
             </React.Fragment>
         )
     }
