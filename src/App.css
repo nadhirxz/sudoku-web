@@ -130,14 +130,14 @@
 .not-possible {
     background-color: #661616;
 }
-svg {
+#board-button-div svg {
     height: 20px;
     align-self: flex-end;
     align-content: center;
     margin: 5px;
     transition: fill .3s;
 }
-svg:hover {
+#board-button-div svg:hover {
     fill: #0a9cc0;
     cursor: pointer;
 }
