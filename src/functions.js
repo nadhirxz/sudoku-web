@@ -1,12 +1,15 @@
+import Board from './components/Board';
+import ReactDOMServer from 'react-dom/server';
+
 export function possible(board, x, y, n) {
     // checking if there's n in the row
     for (let i = 0; i < 9; i++) {
-        if (board[x][i] === n) return false;
+        if (i != y && board[x][i] === n) return false;
     }
 
     // checking if there's n in the column
     for (let i = 0; i < 9; i++) {
-        if (board[i][y] === n) return false;
+        if (i != x && board[i][y] === n) return false;
     }
 
     // checking if there's n in the square
@@ -15,7 +18,7 @@ export function possible(board, x, y, n) {
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            if (board[a + i][b + j] === n) return false;
+            if ((a + i) != x && (b + j) != y && board[a + i][b + j] === n) return false;
         }
     }
 
@@ -39,6 +42,15 @@ export function print(board) {
         }
     }
     console.log(a);
+}
+
+function solved(board) {
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (board[i][j] == 0 || !possible(board, i, j, board[i][j])) return false;
+        }
+    }
+    return true;
 }
 
 export function solve(board) {
@@ -70,6 +82,19 @@ export function solve(board) {
 }
 
 export function generateBoard(number) { // the higher the number the more blanks there are
+    // let board = [
+    //     [0, 3, 4, 6, 7, 8, 9, 1, 2],
+    //     [6, 7, 2, 1, 9, 5, 3, 4, 8],
+    //     [1, 9, 8, 3, 4, 2, 5, 6, 7],
+
+    //     [8, 5, 9, 7, 6, 1, 4, 2, 3],
+    //     [4, 2, 6, 8, 5, 3, 7, 9, 1],
+    //     [7, 1, 3, 9, 2, 4, 8, 5, 6],
+
+    //     [9, 6, 1, 5, 3, 7, 2, 8, 4],
+    //     [2, 8, 7, 4, 1, 9, 6, 3, 5],
+    //     [3, 4, 5, 2, 8, 6, 1, 7, 9],
+    // ]
     let board = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -111,6 +136,26 @@ function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function setCells(board) {
+    cells = Array.from(document.getElementsByClassName('cell'));
+    var clickedCell = false;
+    cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            if (cell.classList.contains('clicked')) {
+                cell.classList.remove('clicked');
+                clickedCell = false;
+                document.onkeypress = null;
+            } else if (!cell.classList.contains('locked')) {
+                cell.classList.add('clicked');
+                if (clickedCell) clickedCell.classList.remove('clicked');
+                clickedCell = cell;
+                document.onkeypress = (e) => keyPress(parseInt(e.key), cell, board);
+            }
+        });
+    });
+    return cells;
+}
+
 export async function showCells(c) {
     let cells = [];
     while (c.length) cells.push(c.splice(0, 9));
@@ -131,7 +176,7 @@ export async function showCells(c) {
     }
 }
 
-export function keyPress(key, cell, board) {
+function keyPress(key, cell, board) {
     let cellNum = cell.id.split('-').map(e => parseInt(e)), x = cellNum[0], y = cellNum[1];
     if (key == 0) {
         board[x][y] = 0;
@@ -150,17 +195,46 @@ export function keyPress(key, cell, board) {
         }
         board[x][y] = key;
     }
+    if (solved(board)) boardIsSolved(cell);
 }
 
-export function startTimer(waitingTime, classname) {
+function boardIsSolved(lastCell) {
+    lastCell.classList.remove('clicked');
+    document.onkeypress = (e) => e.stopPropagation();
+    clearInterval(timer);
+
+    document.getElementById('board-button-div').innerHTML = `<button id="board-button">New Game</button>`;
+
+    document.getElementById('board-message').style.opacity = 1;
+    document.getElementById('board-button').style.opacity = 1;
+    document.getElementById('board-button').addEventListener('click', () => newGame());
+}
+
+
+export function newGame() {
+    let container = document.getElementById('container');
+
+    board = generateBoard(difficulty);
+
+    container.innerHTML = ReactDOMServer.renderToString(<Board board={board} />);
+    setTimeout(() => startTimer(1000, 'timer'), 200);
+    container.style.opacity = 1;
+
+    document.getElementsByTagName('svg')[0].addEventListener('click', newGame);
+
+    let cells = setCells(board);
+    showCells(cells);
+}
+
+export function startTimer(waitingTime, id) {
     let seconds = 0;
-    let timer = document.getElementsByClassName(classname)[0];
+    let timerDiv = document.getElementById(id);
+    timerDiv.style.opacity = 1;
     setTimeout(() => {
-        timer.style.opacity = 1;
-        setInterval(() => {
+        timerDiv.style.opacity = 1;
+        timer = setInterval(() => {
             seconds++;
-            timer.innerHTML = `${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`;
-            console.log(`${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`)
+            timerDiv.innerHTML = `${pad(parseInt(seconds / 60))}:${pad(seconds % 60)}`;
         }, 1000);
     }, waitingTime);
 }
@@ -170,3 +244,8 @@ function pad(val) {
     if (valString.length < 2) return "0" + valString;
     return valString;
 }
+
+var cells;
+var difficulty = 5;
+export var board = generateBoard(1);
+export var timer;
