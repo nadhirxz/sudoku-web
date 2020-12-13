@@ -90,7 +90,6 @@
 #board-button {
     height: 50%;
     width: 90%;
-    transition: .5s;
     opacity: 0;
 }
 .btn {
@@ -99,8 +98,9 @@
     border:none;
     border-radius: 4px;
     cursor: pointer;
+    transition: .5s;
 }
-#board-button:hover {
+.btn:hover {
     background-color: #12bee9;
 }
 .row {
