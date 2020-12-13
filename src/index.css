@@ -16,3 +16,11 @@ body {
 button {
     outline:none;
 }
+a {
+    color: #0a9cc0;
+    text-decoration: none;
+    transition: .5s;
+}
+a:hover {
+    color: #12bee9;
+}

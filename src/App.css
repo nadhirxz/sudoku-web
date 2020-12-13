@@ -169,3 +169,12 @@
     width: 40%;
 }
 #difficulty { font-size: .7em; }
+
+#footer {
+    font-size: .6em;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
